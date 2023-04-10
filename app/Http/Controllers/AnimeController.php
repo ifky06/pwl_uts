@@ -14,7 +14,7 @@ class AnimeController extends Controller
      */
     public function index()
     {
-        $anm = Anime::all();
+        $anm = Anime::paginate(5);
         return view('Anime.anime')
         ->with('anm', $anm);
     }

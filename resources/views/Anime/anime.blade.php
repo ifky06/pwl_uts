@@ -64,6 +64,9 @@
                     @endif
                 </tbody>
             </table>
+            <div class="my-3">
+                {{$anm->links()}}
+            </div>
         </div>
     </div>
     <!-- /.card -->
