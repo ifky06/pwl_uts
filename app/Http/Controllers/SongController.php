@@ -26,7 +26,8 @@ class SongController extends Controller
      */
     public function create()
     {
-        //
+        return view('songs.song_form')
+            ->with('url_form', url('/songs'));
     }
 
     /**
@@ -37,7 +38,15 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+            'artist' => 'required|string',
+            'genre' => 'required|string',
+            'year' => 'required|numeric',
+        ]);
+
+        Song::create($request->all());
+        return redirect('/songs');
     }
 
     /**

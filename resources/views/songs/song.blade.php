@@ -25,7 +25,7 @@
         <div class="card">
             <div class="card-body">
 
-                <a href="{{url('mahasiswa/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
+                <a href="{{url('songs/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
                 <table class="table table-striped">
                     <thead>
                     <tr>
