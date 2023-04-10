@@ -12,8 +12,19 @@ class AnimeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('search')) {
+            $anm = Anime::where('title', 'like', '%' . $request->search . '%')
+                ->orWhere('sinopsis', 'like', '%' . $request->search . '%')
+                ->orWhere('genre', 'like', '%' . $request->search . '%')
+                ->orWhere('studio', 'like', '%' . $request->search . '%')
+                ->orWhere('year', 'like', '%' . $request->search . '%')
+                ->paginate(5);
+            return view('Anime.anime')
+                ->with('anm', $anm);
+        }
+
         $anm = Anime::paginate(5);
         return view('Anime.anime')
         ->with('anm', $anm);

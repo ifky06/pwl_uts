@@ -25,6 +25,14 @@
         <div class="card-body">
 
             <a href="{{url('anime/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
+            <form action="{{url('anime')}}" method="get">
+                <div class="input-group mb-3">
+                    <input type="text" name="search" class="form-control" placeholder="Search" value="{{request()->search}}">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
             <table class="table table-bordered table-striped">
                 <Head>
                     <tr>
