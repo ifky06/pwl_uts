@@ -30,11 +30,19 @@
             <a href="{{ url('/') }}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Hayo
+                Dashboard
               </p>
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ url('/songs') }}" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Songs
+              </p>
+            </a>
+          </li>
+            <li class="nav-item">
             <a href="{{ url('/profile') }}" class="nav-link">
               <i class="nav-icon far fa-user"></i>
               <p>
