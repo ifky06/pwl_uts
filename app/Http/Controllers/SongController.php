@@ -12,9 +12,18 @@ class SongController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Song::all();
+        if ($request->has('search')) {
+            $data = Song::where('title', 'like', '%' . $request->search . '%')
+                ->orWhere('artist', 'like', '%' . $request->search . '%')
+                ->orWhere('genre', 'like', '%' . $request->search . '%')
+                ->orWhere('year', 'like', '%' . $request->search . '%')
+                ->paginate(5);
+            return view('songs.song')
+                ->with('songs', $data);
+        }
+        $data = Song::paginate(5);
         return view('songs.song')
             ->with('songs', $data);
     }
