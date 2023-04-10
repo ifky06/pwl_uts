@@ -24,12 +24,21 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-body">
-
+                <div class="d-flex justify-content-between align-items-center mb-1">
                 <a href="{{url('songs/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
-                <table class="table table-striped">
+                <form action="{{url('songs')}}" method="get">
+                    <div class="input-group mb-3">
+                        <input type="text" name="search" class="form-control" placeholder="Search" value="{{request()->search}}">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">Search</button>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                <table class="table table-striped mb-3">
                     <thead>
                     <tr>
-                        <th>No</th>
+{{--                        <th>No</th>--}}
                         <th>Title</th>
                         <th>Artist</th>
                         <th>Genre</th>
@@ -39,9 +48,9 @@
                     </thead>
                     <tbody>
                     @if($songs->count() > 0)
-                        @foreach($songs as $no => $row)
+                        @foreach($songs as $row)
                             <tr>
-                                <td>{{ $no+1 }}</td>
+{{--                                <td>{{ $row->no }}</td>--}}
                                 <td>{{ $row->title }}</td>
                                 <td>{{ $row->artist }}</td>
                                 <td>{{ $row->genre }}</td>
@@ -64,7 +73,7 @@
 
                     </tbody>
                 </table>
-
+                {{ $songs->links() }}
             </div>
         </div>
         <!-- /.card -->
