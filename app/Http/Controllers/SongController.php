@@ -66,9 +66,13 @@ class SongController extends Controller
      * @param  \App\Models\Song  $song
      * @return \Illuminate\Http\Response
      */
-    public function edit(Song $song)
+    public function edit($id)
     {
-        //
+        $data = Song::find($id);
+//        dd($song);
+        return view('songs.song_form')
+            ->with('songs', $data)
+            ->with('url_form', url('/songs/' . $id));
     }
 
     /**
@@ -78,9 +82,17 @@ class SongController extends Controller
      * @param  \App\Models\Song  $song
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Song $song)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+            'artist' => 'required|string',
+            'genre' => 'required|string',
+            'year' => 'required|numeric',
+        ]);
+
+        $data = Song::where('id',$id)->update($request->except('_token', '_method'));
+        return redirect('/songs');
     }
 
     /**
@@ -89,8 +101,10 @@ class SongController extends Controller
      * @param  \App\Models\Song  $song
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Song $song)
+    public function destroy($id)
     {
-        //
+        $data = Song::find($id);
+        $data->delete();
+        return redirect('/songs');
     }
 }
