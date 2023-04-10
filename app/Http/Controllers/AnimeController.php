@@ -14,7 +14,9 @@ class AnimeController extends Controller
      */
     public function index()
     {
-        //
+        $anm = Anime::all();
+        return view('Anime.anime')
+        ->with('anm', $anm);
     }
 
     /**
@@ -24,7 +26,8 @@ class AnimeController extends Controller
      */
     public function create()
     {
-        //
+        return view('Anime.create_anime')
+        ->with('url_form', url('/anime'));
     }
 
     /**
@@ -35,7 +38,16 @@ class AnimeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+            'sinopsis' => 'required|string',
+            'genre' => 'required|string',
+            'studio' => 'required|string',
+            'year' => 'required|numeric',
+        ]);
+
+        Anime::create($request->all());
+        return redirect('/anime')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -55,9 +67,12 @@ class AnimeController extends Controller
      * @param  \App\Models\Anime  $anime
      * @return \Illuminate\Http\Response
      */
-    public function edit(Anime $anime)
+    public function edit($id)
     {
-        //
+        $anm = Anime::find($id);
+        return view('Anime.create_anime')
+            ->with('anm', $anm)
+            ->with('url_form',url('/anime/'.$id));
     }
 
     /**
@@ -67,9 +82,18 @@ class AnimeController extends Controller
      * @param  \App\Models\Anime  $anime
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Anime $anime)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+            'sinopsis' => 'required|string',
+            'genre' => 'required|string',
+            'studio' => 'required|string',
+            'year' => 'required|numeric',
+        ]);
+
+        $data = Anime::where('id', '=', $id)->update($request->except('_token', '_method'));
+        return redirect('/anime')->with('success', 'Data berhasil diubah');
     }
 
     /**
@@ -78,8 +102,10 @@ class AnimeController extends Controller
      * @param  \App\Models\Anime  $anime
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Anime $anime)
+    public function destroy($id)
     {
-        //
+        Anime::where('id', '=', $id)->delete();
+        return redirect('anime')
+        ->with('success', 'Data berhasil dihapus');
     }
 }

@@ -42,11 +42,11 @@
               </p>
             </a>
           </li>
-            <li class="nav-item">
-            <a href="{{ url('/profile') }}" class="nav-link">
+          <li class="nav-item">
+            <a href="{{ url('/anime') }}" class="nav-link">
               <i class="nav-icon far fa-user"></i>
               <p>
-                Mau Buat Apa
+                Anime List
               </p>
             </a>
           </li>
