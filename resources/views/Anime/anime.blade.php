@@ -26,7 +26,7 @@
 
             <a href="{{url('anime/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
             <form action="{{url('anime')}}" method="get">
-                <div class="input-group mb-3">
+                <div class="input-group mb-3 w-25">
                     <input type="text" name="search" class="form-control" placeholder="Search" value="{{request()->search}}">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="submit">Search</button>
@@ -56,7 +56,7 @@
                             <td>{{ $a->studio }}</td>
                             <td>{{ $a->year }}</td>
                             <td>
-                                <a href="{{url('/anime/' .$a->id. '/edit')}}" class="btn btn-warning">Edit</a>
+                                <a href="{{url('/anime/' .$a->id. '/edit')}}" class="btn btn-sm btn-warning">Edit</a>
                                 <form method="POST" action="{{url('/anime/'.$a->id)}}">
                                 @csrf
                                 @method('DELETE')
