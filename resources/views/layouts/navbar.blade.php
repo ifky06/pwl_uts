@@ -5,14 +5,21 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="../../index3.html" class="nav-link">Home</a>
+        <a href="{{url('/')}}" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-          <form action="{{url('logout')}}" method="post" style="display: inline">
-              @csrf
-              @method('POST')
-              <button type="submit" class="btn text-secondary btn-link">Logout</button>
-          </form>
+          @auth
+              <form action="{{url('logout')}}" method="post" style="display: inline">
+                  @csrf
+                  @method('POST')
+                  <button type="submit" class="btn text-secondary btn-link">Logout</button>
+              </form>
+          @endauth
+          @guest
+                <a href="{{route('login')}}" class="nav-link">Login</a>
+          @endguest
+
+
 {{--        <a href="{{route('logout')}}" class="nav-link">Logout</a>--}}
       </li>
     </ul>
