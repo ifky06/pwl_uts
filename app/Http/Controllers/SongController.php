@@ -51,7 +51,7 @@ class SongController extends Controller
             'title' => 'required|string',
             'artist' => 'required|string',
             'genre' => 'required|string',
-            'year' => 'required|numeric',
+            'year' => 'required|numeric|digits:4',
         ]);
 
         Song::create($request->all());
@@ -97,7 +97,7 @@ class SongController extends Controller
             'title' => 'required|string',
             'artist' => 'required|string',
             'genre' => 'required|string',
-            'year' => 'required|numeric',
+            'year' => 'required|numeric|digits:4',
         ]);
 
         $data = Song::where('id',$id)->update($request->except('_token', '_method'));
