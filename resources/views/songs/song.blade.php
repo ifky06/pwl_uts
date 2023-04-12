@@ -27,7 +27,8 @@
                 <a href="{{url('songs/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
                 <form action="{{url('songs')}}" method="get">
                     <div class="input-group mb-3 w-25">
-                        <input type="text" name="search" class="form-control" placeholder="Search" value="{{request()->search}}">
+                        <input type="text" name="search" class="form-control" placeholder="Search"
+                               value="{{request()->search}}">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">Search</button>
                         </div>
@@ -36,7 +37,7 @@
                 <table class="table table-striped mb-3">
                     <thead>
                     <tr>
-{{--                        <th>No</th>--}}
+                        {{--                        <th>No</th>--}}
                         <th>Title</th>
                         <th>Artist</th>
                         <th>Genre</th>
@@ -48,17 +49,19 @@
                     @if($songs->count() > 0)
                         @foreach($songs as $row)
                             <tr>
-{{--                                <td>{{ $row->no }}</td>--}}
+                                {{--                                <td>{{ $row->no }}</td>--}}
                                 <td>{{ $row->title }}</td>
                                 <td>{{ $row->artist }}</td>
                                 <td>{{ $row->genre }}</td>
                                 <td>{{$row->year }}</td>
                                 <td>
-                                    <a href="{{url('/songs/'.$row->id.'/edit')}}" class="btn btn-sm btn-primary">edit</a>
+                                    <a href="{{url('/songs/'.$row->id.'/edit')}}"
+                                       class="btn btn-sm btn-primary">edit</a>
                                     <form action="{{url('/songs/'.$row->id)}}" method="post" style="display: inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')">Delete
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
