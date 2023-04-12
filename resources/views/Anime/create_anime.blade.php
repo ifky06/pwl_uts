@@ -22,7 +22,7 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-body">
-        <form method="POST" action="{{$url_form}}">
+        <form method="POST" action="{{$url_form}}" enctype="multipart/form-data">
             @csrf
             {!!isset($anm)?method_field('PUT'):''!!}
             
@@ -33,6 +33,13 @@
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
+
+            <div class="form-group">
+                <label for="nama">Image</label>
+                <input type="file" class="form-control" id="image" name="image" placeholder="Input Image" value="{{isset($anm)?$anm->image:old('image')}}">
+                @error('image')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
             
             <div class="form-group">
                 <label for="nama">Synopsis</label>

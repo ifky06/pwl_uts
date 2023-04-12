@@ -38,6 +38,7 @@
                     <tr>
                         <th>No</th>
                         <th>Title</th>
+                        <th>Picture</th>
                         <th>Synopsis</th>
                         <th>Genre</th>
                         <th>Studio</th>
@@ -51,16 +52,17 @@
                         <tr>
                             <td>{{ $i+1 }}</td>
                             <td>{{ $a->title }}</td>
+                            <td><img src="{{asset('images/'.$a->image)}}" width="100px"></td>
                             <td>{{ $a->sinopsis }}</td>
                             <td>{{ $a->genre }}</td>
                             <td>{{ $a->studio }}</td>
                             <td>{{ $a->year }}</td>
                             <td>
-                                <a href="{{url('/anime/' .$a->id. '/edit')}}" class="btn btn-sm btn-warning">Edit</a>
+                                <a href="{{url('/anime/' .$a->id. '/edit')}}" class="btn btn-sm btn-warning nav-icon fas fa-edit my-2 w-100"></a>
                                 <form method="POST" action="{{url('/anime/'.$a->id)}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-sm btn-danger nav-icon fas fa-trash-alt w-100"></button>
                                 </form>
                             </td>
                         </tr>

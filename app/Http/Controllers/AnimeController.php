@@ -51,13 +51,22 @@ class AnimeController extends Controller
     {
         $request->validate([
             'title' => 'required|string',
+            'image' => 'required',
             'sinopsis' => 'required|string',
             'genre' => 'required|string',
             'studio' => 'required|string',
             'year' => 'required|numeric',
         ]);
 
-        Anime::create($request->all());
+        $data = Anime::create($request->all());
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $image_name = $image->getClientOriginalName();
+            $image->move(public_path('images/'), $image_name);
+            $data->image = $image_name;
+            $data->save();
+        }
         return redirect('/anime')->with('success', 'Data berhasil ditambahkan');
     }
 
@@ -97,14 +106,27 @@ class AnimeController extends Controller
     {
         $request->validate([
             'title' => 'required|string',
+            'image' => 'required',
             'sinopsis' => 'required|string',
             'genre' => 'required|string',
             'studio' => 'required|string',
             'year' => 'required|numeric',
         ]);
 
-        $data = Anime::where('id', '=', $id)->update($request->except('_token', '_method'));
-        return redirect('/anime')->with('success', 'Data berhasil diubah');
+        $data = Anime::find($id);
+
+        if ( $request->hasFile('image') ) {
+
+            // jika user menginputkan gambar, maka pindahkan gambar tersebut di sutau folder dengan nama aslis dari file gambasr tersebut
+            $file = $request->file('image');
+            $extention = $file->getClientOriginalName();
+            $file->move('images/', $extention);
+            $data->image = $extention;
+        }
+
+        $data->update();
+        return redirect('/anime')->with('success', 'Data Berhasil Dirubah!');
+
     }
 
     /**

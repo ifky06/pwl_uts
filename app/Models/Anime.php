@@ -11,6 +11,7 @@ class Anime extends Model
     protected $table = 'anime';
     protected $fillable = [
         'title',
+        'image',
         'sinopsis',
         'genre',
         'studio',
